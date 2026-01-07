@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer utilities {
+  .bg-grid-pattern {
+    --grid-color: rgba(229, 231, 235, 0.5); /* Light gray lines */
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    /* This creates the "fade out" effect towards the edges */
+    mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+  }
+}
