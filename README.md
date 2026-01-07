@@ -1,8 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Voxear
 
-## Getting Started
+This project consists of a [Next.js](https://nextjs.org) frontend and a Python (FastAPI) backend for Deepfake Detection.
 
-First, run the development server:
+## Project Structure
+
+- `src/` - Next.js Frontend
+- `backend/` - Python/FastAPI Backend
+
+---
+
+## Frontend (Next.js)
+
+Bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+### Getting Started
+
+run the development server:
 
 ```bash
 npm run dev
@@ -19,6 +32,54 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+---
+
+## Backend (Python)
+
+Responsible for Deepfake Detection (AI & Physics).
+
+### Prerequisites
+- Python 3.8+
+- pip
+
+### Initialization
+
+1. **Navigate to the backend directory:**
+   ```bash
+   cd backend
+   ```
+
+2. **Create a virtual environment:**
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activate the virtual environment:**
+   - On server/Linux/macOS:
+     ```bash
+     source venv/bin/activate
+     ```
+   - On Windows:
+     ```bash
+     venv\Scripts\activate
+     ```
+
+4. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Running the Server
+
+Start the FastAPI development server:
+```bash
+uvicorn main:app --reload
+```
+The API will be available at `http://localhost:8000`.
+Docs are available at `http://localhost:8000/docs`.
+
+---
 
 ## Learn More
 
