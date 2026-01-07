@@ -29,15 +29,9 @@ export function NavigationMenuHeader() {
 
         <NavigationMenu className="ml-auto w-fit">
           <NavigationMenuList className="flex-wrap justify-end gap-6 text-sm font-semibold">
-            <NavigationMenuItem className="hidden md:block">
-              <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link href="/">Home</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link href="/how-it-works">How it works?</Link>
+                <Link href="/how-it-works">How it works</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
 
