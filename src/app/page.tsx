@@ -1,11 +1,12 @@
-import { NavigationMenuHeader} from "@/components/header/header"
+import { NavigationMenuHeader } from "@/components/header/header"
 import { GridBackground } from "@/components/ui/grid-bg"
+import Link from "next/link"
 
 export default function Home() {
   return (
     <div>
-    <NavigationMenuHeader/>
-    <div className="relative flex min-h-screen flex-col bg-white text-foreground overflow-x-hidden">
+      <NavigationMenuHeader />
+      <div className="relative flex min-h-screen flex-col bg-white text-foreground overflow-x-hidden">
         {/* Perspective Grid Background */}
         <GridBackground />
 
@@ -21,9 +22,11 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col gap-4 mt-8 w-full max-w-sm">
-            <button className="h-12 w-full bg-white text-black font-bold uppercase tracking-wide border border-zinc-200 rounded-md shadow-sm hover:shadow-md transition-all active:scale-[0.98]">
-              Get Started
-            </button>
+            <Link href="/upload" className="w-full">
+              <button className="h-12 w-full bg-white text-black font-bold uppercase tracking-wide border border-zinc-200 rounded-md shadow-sm hover:shadow-md transition-all active:scale-[0.98]">
+                Get Started
+              </button>
+            </Link>
             <button className="h-12 w-full bg-white text-black font-bold uppercase tracking-wide border border-zinc-200 rounded-md shadow-sm hover:shadow-md transition-all active:scale-[0.98]">
               Sign In
             </button>
@@ -32,9 +35,9 @@ export default function Home() {
 
         {/* Scrollable Description Section (Placeholder) */}
         <div className="relative z-10 w-full min-h-[400px] bg-zinc-200 flex items-center justify-center mt-20">
-            <h2 className="text-3xl font-bold opacity-80">Scrollable Desc abt the page</h2>
+          <h2 className="text-3xl font-bold opacity-80">Scrollable Desc abt the page</h2>
         </div>
-    </div>
+      </div>
     </div>
   );
 }
