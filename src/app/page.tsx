@@ -30,10 +30,6 @@ export default function Home() {
           </div>
         </main>
 
-        {/* Scrollable Description Section (Placeholder) */}
-        <div className="relative z-10 w-full min-h-[400px] bg-zinc-200 flex items-center justify-center mt-20">
-            <h2 className="text-3xl font-bold opacity-80">Scrollable Desc abt the page</h2>
-        </div>
     </div>
     </div>
   );
