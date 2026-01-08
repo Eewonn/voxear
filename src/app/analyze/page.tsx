@@ -2,6 +2,7 @@
 
 import { NavigationMenuHeader } from "@/components/header/header";
 import { Upload, Loader2, BarChart3, Check } from "lucide-react";
+import { GridBackground } from '@/components/ui/grid-bg'
 
 export default function AnalyzePage() {
   const steps = [
@@ -14,7 +15,7 @@ export default function AnalyzePage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       {/* Background Grid Layer */}
-      <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
+      <GridBackground />
 
       {/* Your Existing Header */}
       <NavigationMenuHeader />
