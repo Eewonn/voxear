@@ -1,6 +1,7 @@
 import { NavigationMenuHeader } from "@/components/header/header"
 import { GridBackground } from "@/components/ui/grid-bg"
 import { Upload, BarChart3, Loader2 } from "lucide-react"
+import { NavigationCircle } from "@/components/ui/navigation-circle"
 import React from "react"
 
 export default function ResultsPage() {
@@ -13,42 +14,7 @@ export default function ResultsPage() {
 				<main className="relative z-10 flex flex-1 flex-col items-center pt-16 md:pt-24 text-center gap-6 px-4 w-full">
 					<div className="w-full max-w-6xl">
 						{/* Steps */}
-						<div className="w-full max-w-md mx-auto mb-8">
-							<div className="flex items-center justify-center relative">
-
-								{/* Connector Line */}
-								<div className="absolute top-1/2 left-0 w-full h-[1px] -z-10 bg-transparent flex justify-center">
-									<div className="w-2/3 h-[2px] bg-zinc-200"></div>
-								</div>
-
-								{/* Steps */}
-								<div className="flex justify-between w-full px-8">
-									{/* Step 1: Upload */}
-									<div className="flex flex-col items-center gap-2 bg-white px-2">
-										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-white border-2 border-zinc-200 text-zinc-400">
-											<Upload className="h-5 w-5" />
-										</div>
-										<span className="text-sm font-medium text-zinc-500">Upload</span>
-									</div>
-
-									{/* Step 2: Analyze */}
-									<div className="flex flex-col items-center gap-2 bg-white px-2">
-										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-white border-2 border-zinc-200 text-zinc-400">
-											<Loader2 className="h-5 w-5" />
-										</div>
-										<span className="text-sm font-medium text-zinc-500">Analyze</span>
-									</div>
-
-									{/* Step 3: Results (Active) */}
-									<div className="flex flex-col items-center gap-2 bg-white px-2">
-										<div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-white shadow-lg ring-4 ring-white">
-											<BarChart3 className="h-5 w-5" />
-										</div>
-										<span className="text-sm font-medium text-zinc-900">Results</span>
-									</div>
-								</div>
-							</div>
-						</div>
+						<NavigationCircle currentStep={3} />
 
 						<h2 className="text-lg md:text-xl font-semibold text-zinc-800">Upload a video and let our advanced AI analyze it using physics-based verification and neural network detection algorithms.</h2>
 
@@ -97,8 +63,48 @@ export default function ResultsPage() {
 						<div className="mt-6 bg-white border border-zinc-200 rounded-lg p-4 shadow-sm">
 							<div className="text-sm font-semibold text-zinc-700 mb-3">Detected Anomalies</div>
 							<div className="space-y-3">
-								{Array.from({ length: 6 }).map((_, i) => (
-									<div key={i} className="h-6 rounded-full bg-zinc-200 w-full max-w-4xl mx-auto" />
+								{[
+									{
+										title: "Inconsistent eye reflections",
+										desc: "Specular highlights in the eyes don't match scene lighting.",
+										confidence: "High",
+									},
+									{
+										title: "Temporal lip-sync drift",
+										desc: "Audio and lip movements are slightly out of sync across several frames.",
+										confidence: "High",
+									},
+									{
+										title: "Unnatural skin texture",
+										desc: "Patches of overly smooth skin with inconsistent microtexture.",
+										confidence: "Medium",
+									},
+									{
+										title: "Missing subtle shadows",
+										desc: "Soft shadows around facial features are absent or inconsistent.",
+										confidence: "Medium",
+									},
+									{
+										title: "Frame-level warping",
+										desc: "Small spatial warps appear near the jawline on fast motion.",
+										confidence: "Low",
+									},
+									{
+										title: "Color/illumination mismatch",
+										desc: "Local color temperature differs from surrounding pixels.",
+										confidence: "Low",
+									},
+								].map((anomaly, i) => (
+									<div
+										key={i}
+										className="flex items-center justify-between bg-zinc-50 p-3 rounded-md border border-zinc-100 max-w-4xl mx-auto"
+									>
+										<div className="text-left">
+											<div className="text-sm font-medium text-zinc-800">{anomaly.title}</div>
+											<div className="text-xs text-zinc-500">{anomaly.desc}</div>
+										</div>
+										<div className="text-xs font-semibold text-zinc-600">{anomaly.confidence}</div>
+									</div>
 								))}
 							</div>
 						</div>
