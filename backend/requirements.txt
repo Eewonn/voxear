@@ -1,2 +1,8 @@
 fastapi
 uvicorn
+ffmpeg-python
+opencv-python
+torch
+mediapipe
+numpy
+scipy
