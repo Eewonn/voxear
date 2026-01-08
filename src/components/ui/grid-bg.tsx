@@ -1,7 +1,7 @@
 export function GridBackground() {
   return (
-    <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
-      <div 
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+      <div
         className="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] opacity-[0.4]"
         style={{
           backgroundImage: 'linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px)',

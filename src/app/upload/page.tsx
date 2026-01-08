@@ -1,9 +1,31 @@
+"use client"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { NavigationMenuHeader } from "@/components/header/header"
 import { GridBackground } from "@/components/ui/grid-bg"
 import { Upload, BarChart3, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { VideoReady } from "./video-ready"
 
 export default function UploadPage() {
+    const router = useRouter()
+    const [file, setFile] = useState<File | null>(null)
+
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setFile(e.target.files[0])
+        }
+    }
+
+    const handleAnalyze = () => {
+        router.push("/analyze")
+    }
+
+    const handleReset = () => {
+        setFile(null)
+    }
+
     return (
         <div>
             <NavigationMenuHeader />
@@ -27,7 +49,7 @@ export default function UploadPage() {
                             <div className="flex justify-between w-full px-8">
                                 {/* Step 1: Upload (Active) */}
                                 <div className="flex flex-col items-center gap-2 bg-white px-2">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-white shadow-lg ring-4 ring-white">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#769BC1] text-white shadow-lg ring-4 ring-white">
                                         <Upload className="h-5 w-5" />
                                     </div>
                                     <span className="text-sm font-medium text-zinc-900">Upload</span>
@@ -59,30 +81,39 @@ export default function UploadPage() {
                         </h1>
                     </div>
 
-                    {/* Upload Drop Zone */}
-                    <div className="w-full max-w-4xl mt-8 animate-in fade-in zoom-in-95 duration-500">
-                        <div className="group relative flex flex-col items-center justify-center w-full aspect-video md:aspect-[2/1] rounded-[2rem] border-2 border-dashed border-zinc-400 bg-white hover:bg-zinc-50 transition-all cursor-pointer">
+                    {/* Upload Drop Zone or Video Ready State */}
+                    {!file ? (
+                        <div className="w-full max-w-4xl mt-8 animate-in fade-in zoom-in-95 duration-500">
+                            <div className="group relative z-30 flex flex-col items-center justify-center w-full aspect-video md:aspect-[2/1] rounded-[2rem] border-2 border-dashed border-zinc-400 bg-white hover:bg-zinc-50 transition-all cursor-pointer shadow-sm isolate" style={{ backgroundColor: '#ffffff', isolation: 'isolate' }}>
 
-                            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 mb-6 group-hover:scale-110 transition-transform">
-                                <Upload className="h-8 w-8" />
+                                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 mb-6 group-hover:scale-110 transition-transform">
+                                    <Upload className="h-8 w-8" />
+                                </div>
+
+                                <div className="space-y-1">
+                                    <p className="text-xl font-bold text-zinc-900">
+                                        Drag & drop your video here
+                                    </p>
+                                    <p className="text-sm text-zinc-400">
+                                        or click to browse from your device
+                                    </p>
+                                </div>
+
+                                <input
+                                    type="file"
+                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    accept="video/*"
+                                    onChange={handleFileSelect}
+                                />
                             </div>
-
-                            <div className="space-y-1">
-                                <p className="text-xl font-bold text-zinc-900">
-                                    Drag & drop your video here
-                                </p>
-                                <p className="text-sm text-zinc-400">
-                                    or click to browse from your device
-                                </p>
-                            </div>
-
-                            <input
-                                type="file"
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                accept="video/*"
-                            />
                         </div>
-                    </div>
+                    ) : (
+                        <VideoReady
+                            file={file}
+                            onAnalyze={handleAnalyze}
+                            onReset={handleReset}
+                        />
+                    )}
 
                 </main>
             </div>
