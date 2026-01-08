@@ -46,9 +46,9 @@ export function NavigationCircle({ currentStep }: NavigationCircleProps) {
                                     className={cn(
                                         "flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all duration-300",
                                         isActive
-                                            ? "bg-blue-500 border-blue-500 text-white shadow-lg ring-4 ring-white"
+                                            ? "bg-[#769BC1] border-[#769BC1] text-white shadow-lg ring-4 ring-white"
                                             : isCompleted
-                                            ? "bg-blue-500 border-blue-500 text-white"
+                                            ? "bg-[#769BC1] border-[#769BC1] text-white"
                                             : "bg-white border-zinc-200 text-zinc-400"
                                     )}
                                 >
