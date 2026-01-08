@@ -8,10 +8,26 @@ import { GridBackground } from "@/components/ui/grid-bg";
 export default function AnalyzePage() {
   // Step data drives both the progress card and the navigation circle
   const steps = [
-    { title: "Physics-based verification", status: "completed" },
-    { title: "Running AI analysis", status: "completed" },
-    { title: "Detecting motion patterns", status: "completed" },
-    { title: "Extracting Video Frames", status: "current" },
+    {
+      title: "Physics-based verification",
+      status: "completed",
+      description: "Validating the structural integrity and lighting consistency of the video to detect potential manipulation."
+    },
+    {
+      title: "Running AI analysis",
+      status: "completed",
+      description: "Scanning for deepfake indicators using advanced neural networks trained on diverse datasets."
+    },
+    {
+      title: "Detecting motion patterns",
+      status: "completed",
+      description: "Analyzing unnatural movements and micro-expressions that differentiate synthetic media from reality."
+    },
+    {
+      title: "Extracting Video Frames",
+      status: "current",
+      description: "Breaking down the video into individual frames for detailed, frame-by-frame scrutiny."
+    },
   ];
 
   // Derived progress/state values
@@ -38,7 +54,7 @@ export default function AnalyzePage() {
       {/* Main Content Area */}
       <main className="relative z-10 flex flex-col items-center px-4 pt-16 pb-12">
         <h1 className="text-xl md:text-2xl font-bold text-center max-w-2xl mb-12 leading-snug">
-          Upload a video and let our advanced AI analyze it using physics-based 
+          Upload a video and let our advanced AI analyze it using physics-based
           verification and neural network detection algorithms.
         </h1>
 
@@ -85,15 +101,13 @@ export default function AnalyzePage() {
                 </div>
                 <div>
                   <h3
-                    className={`font-bold text-sm ${
-                      step.status === "completed" ? "text-zinc-900" : "text-zinc-400"
-                    }`}
+                    className={`font-bold text-sm ${step.status === "completed" ? "text-zinc-900" : "text-zinc-400"
+                      }`}
                   >
                     {step.title}
                   </h3>
                   <p className="text-[11px] text-zinc-400 leading-relaxed mt-1">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu
-                    tellus fringilla, dapibus est ut, vul.
+                    {step.description}
                   </p>
                 </div>
               </div>
