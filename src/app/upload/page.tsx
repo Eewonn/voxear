@@ -7,6 +7,8 @@ import { GridBackground } from "@/components/ui/grid-bg"
 import { Upload, BarChart3, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { VideoReady } from "./video-ready"
+import { NavigationCircle } from "@/components/ui/navigation-circle"
+
 
 export default function UploadPage() {
     const router = useRouter()
@@ -37,42 +39,9 @@ export default function UploadPage() {
                 <main className="relative z-10 flex flex-1 flex-col items-center pt-16 md:pt-24 text-center gap-8 px-4 pb-20">
 
                     {/* Progress Stepper */}
-                    <div className="w-full max-w-md mx-auto mb-8">
-                        <div className="flex items-center justify-center relative">
+                    {/* Progress Stepper */}
+                    <NavigationCircle currentStep={1} />
 
-                            {/* Connector Line */}
-                            <div className="absolute top-1/2 left-0 w-full h-[1px] -z-10 bg-transparent flex justify-center">
-                                <div className="w-2/3 h-[2px] bg-zinc-200"></div>
-                            </div>
-
-                            {/* Steps */}
-                            <div className="flex justify-between w-full px-8">
-                                {/* Step 1: Upload (Active) */}
-                                <div className="flex flex-col items-center gap-2 bg-white px-2">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#769BC1] text-white shadow-lg ring-4 ring-white">
-                                        <Upload className="h-5 w-5" />
-                                    </div>
-                                    <span className="text-sm font-medium text-zinc-900">Upload</span>
-                                </div>
-
-                                {/* Step 2: Analyze */}
-                                <div className="flex flex-col items-center gap-2 bg-white px-2">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white border-2 border-zinc-200 text-zinc-400">
-                                        <Loader2 className="h-5 w-5" />
-                                    </div>
-                                    <span className="text-sm font-medium text-zinc-500">Analyze</span>
-                                </div>
-
-                                {/* Step 3: Results */}
-                                <div className="flex flex-col items-center gap-2 bg-white px-2">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white border-2 border-zinc-200 text-zinc-400">
-                                        <BarChart3 className="h-5 w-5" />
-                                    </div>
-                                    <span className="text-sm font-medium text-zinc-500">Results</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     {/* Title & Description */}
                     <div className="space-y-4 max-w-3xl mx-auto">
