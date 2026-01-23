@@ -36,24 +36,26 @@ export default function AnalyzePage() {
         // Start api call
         const apiPromise = analyzeVideo(videoFile);
 
-        // Simulate progress steps while waiting (at least 2s per step to look nice)
-        for (let i = 1; i <= STEPS.length; i++) {
-            setCurrentStep(i);
-            // Wait a bit to simulate processing time for each step
-            await new Promise((resolve) => setTimeout(resolve, 800)); 
-            setCompletedSteps((prev) => [...prev, i]);
-        }
-
+        // Wait for result FIRST
         const result = await apiPromise;
 
         if (result.status === "completed") {
-            // Update UI with final statuses (to show skips) before redirecting
-            if (result.result?.steps) {
+             // Set final statuses immediately so the reveal loop picks them up
+             if (result.result?.steps) {
                  setFinalStepStatuses(result.result.steps);
-                 // Allow user to see the final state briefly
-                 await new Promise((resolve) => setTimeout(resolve, 1500));
+             }
+
+             // Now run the "reveal" animation
+            for (let i = 1; i <= STEPS.length; i++) {
+                setCurrentStep(i);
+                // Faster animation since we are just revealing known results
+                await new Promise((resolve) => setTimeout(resolve, 600)); 
+                setCompletedSteps((prev) => [...prev, i]);
             }
             
+            // Short pause at the end to admire the result
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
             sessionStorage.setItem("analysisResult", JSON.stringify(result.result));
             router.push("/results");
         } else {
