@@ -1,13 +1,14 @@
-import { FileVideo } from "lucide-react"
+import { FileVideo, Loader2 } from "lucide-react"
 
 
 interface VideoReadyProps {
     file: File
     onAnalyze: () => void
     onReset: () => void
+    isAnalyzing: boolean
 }
 
-export function VideoReady({ file, onAnalyze, onReset }: VideoReadyProps) {
+export function VideoReady({ file, onAnalyze, onReset, isAnalyzing }: VideoReadyProps) {
     // Helper to format file size
     const formatSize = (bytes: number) => {
         if (bytes === 0) return "0 B"
@@ -39,14 +40,23 @@ export function VideoReady({ file, onAnalyze, onReset }: VideoReadyProps) {
             {/* Analyze Button */}
             <button
                 onClick={onAnalyze}
-                className="px-8 py-3 bg-[#769BC1] hover:bg-[#6082a6] text-white text-lg font-medium rounded-lg shadow-lg shadow-blue-900/5 transition-all w-full md:w-auto min-w-[200px]"
+                disabled={isAnalyzing}
+                className="px-8 py-3 bg-[#769BC1] hover:bg-[#6082a6] disabled:bg-[#769BC1]/70 disabled:cursor-not-allowed text-white text-lg font-medium rounded-lg shadow-lg shadow-blue-900/5 transition-all w-full md:w-auto min-w-[200px] flex items-center justify-center gap-2"
             >
-                Analyze Video
+                {isAnalyzing ? (
+                    <>
+                        <Loader2 className="h-5 w-5 animate-spin" />
+                        Analyzing...
+                    </>
+                ) : (
+                    "Analyze Video"
+                )}
             </button>
 
             <button
                 onClick={onReset}
-                className="text-sm text-zinc-400 hover:text-zinc-600 underline decoration-zinc-300 underline-offset-4 transition-colors"
+                disabled={isAnalyzing}
+                className="text-sm text-zinc-400 hover:text-zinc-600 underline decoration-zinc-300 underline-offset-4 transition-colors disabled:opacity-50"
             >
                 Choose a different file
             </button>
