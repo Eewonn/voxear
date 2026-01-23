@@ -5,6 +5,10 @@ export interface AnalysisResult {
         label: string;
         probability: number;
         confidence: string;
+        steps?: {
+            id: number;
+            status: 'completed' | 'skipped' | 'failed';
+        }[];
     };
     error?: string;
 }
