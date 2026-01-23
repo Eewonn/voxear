@@ -27,7 +27,7 @@ def read_root():
     return {"status": "ok", "message": "Voxear Backend is running"}
 
 # 
-@app.get("/health")agay talaga 
+@app.get("/health")
 def health_check():
     return {"status": "healthy"}
 
