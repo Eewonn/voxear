@@ -10,9 +10,12 @@ import { VideoReady } from "./video-ready"
 import { NavigationCircle } from "@/components/ui/navigation-circle"
 
 
+import { analyzeVideo } from "@/lib/api"
+
 export default function UploadPage() {
     const router = useRouter()
     const [file, setFile] = useState<File | null>(null)
+    const [isAnalyzing, setIsAnalyzing] = useState(false)
 
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -20,8 +23,26 @@ export default function UploadPage() {
         }
     }
 
-    const handleAnalyze = () => {
-        router.push("/analyze")
+    const handleAnalyze = async () => {
+        if (!file) return
+
+        setIsAnalyzing(true)
+        try {
+            const result = await analyzeVideo(file)
+            
+            if (result.status === "completed") {
+                // Store result in sessionStorage to pass to Results page
+                sessionStorage.setItem("analysisResult", JSON.stringify(result.result))
+                router.push("/results")
+            } else {
+                alert(`Analysis failed: ${result.error}`)
+            }
+        } catch (error) {
+            alert("An unexpected error occurred during analysis.")
+            console.error(error)
+        } finally {
+            setIsAnalyzing(false)
+        }
     }
 
     const handleReset = () => {
@@ -81,6 +102,7 @@ export default function UploadPage() {
                             file={file}
                             onAnalyze={handleAnalyze}
                             onReset={handleReset}
+                            isAnalyzing={isAnalyzing}
                         />
                     )}
 
