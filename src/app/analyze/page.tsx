@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { NavigationMenuHeader } from "@/components/header/header";
 import { NavigationCircle } from "@/components/ui/navigation-circle";
-import { Loader2, Check } from "lucide-react";
+import { Loader2, Check, XCircle } from "lucide-react";
 import { GridBackground } from "@/components/ui/grid-bg";
 import { useVideo } from "@/context/video-context";
 import { analyzeVideo } from "@/lib/api";
@@ -21,6 +21,7 @@ export default function AnalyzePage() {
   const { videoFile } = useVideo();
   const [currentStep, setCurrentStep] = useState(1);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [finalStepStatuses, setFinalStepStatuses] = useState<{id: number, status: string}[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,6 +47,13 @@ export default function AnalyzePage() {
         const result = await apiPromise;
 
         if (result.status === "completed") {
+            // Update UI with final statuses (to show skips) before redirecting
+            if (result.result?.steps) {
+                 setFinalStepStatuses(result.result.steps);
+                 // Allow user to see the final state briefly
+                 await new Promise((resolve) => setTimeout(resolve, 1500));
+            }
+            
             sessionStorage.setItem("analysisResult", JSON.stringify(result.result));
             router.push("/results");
         } else {
@@ -122,14 +130,20 @@ export default function AnalyzePage() {
             {STEPS.map((step) => {
               const isCompleted = completedSteps.includes(step.id);
               const isCurrent = step.id === currentStep;
+              // Check if we have final status from API for this step
+              const finalStatus = finalStepStatuses.find(s => s.id === step.id)?.status;
+              const isSkipped = finalStatus === 'skipped';
               
               return (
                 <div key={step.id} className="flex gap-4">
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1
-                    ${isCompleted ? "bg-[#5D89BA] text-white" : "bg-blue-50 text-[#5D89BA]"}`}
+                    ${isSkipped ? "bg-zinc-100 text-zinc-400" : 
+                      isCompleted ? "bg-[#5D89BA] text-white" : "bg-blue-50 text-[#5D89BA]"}`}
                   >
-                    {isCompleted ? (
+                    {isSkipped ? (
+                         <XCircle size={16} strokeWidth={3} />
+                    ) : isCompleted ? (
                       <Check size={16} strokeWidth={3} />
                     ) : (
                       <div className={`w-2.5 h-2.5 bg-[#5D89BA] rounded-full ${isCurrent ? 'opacity-100 animate-pulse' : 'opacity-60'}`} />
@@ -138,13 +152,14 @@ export default function AnalyzePage() {
                   <div>
                     <h3
                       className={`font-bold text-sm ${
+                        isSkipped ? "text-zinc-400 line-through" :
                         isCompleted || isCurrent ? "text-zinc-900" : "text-zinc-400"
                       }`}
                     >
                       {step.title}
                     </h3>
                     <p className="text-[11px] text-zinc-400 leading-relaxed mt-1">
-                      Processing video data...
+                      {isSkipped ? "Module not used" : "Processing video data..."}
                     </p>
                   </div>
                 </div>
