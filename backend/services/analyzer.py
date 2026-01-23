@@ -62,7 +62,13 @@ def analyze_video(video_path: str):
         result = {
             "label": label,
             "probability": round(probability, 4),
-            "confidence": confidence
+            "confidence": confidence,
+            "steps": [
+                {"id": 1, "status": "completed"}, # Extracting Frames (implicit)
+                {"id": 2, "status": "skipped"},   # Physics-based
+                {"id": 3, "status": "completed"}, # AI Analysis
+                {"id": 4, "status": "skipped"}    # Motion patterns
+            ]
         }
         
         print(f"Analysis complete for {video_path}: {result}")
