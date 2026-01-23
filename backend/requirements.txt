@@ -6,3 +6,5 @@ torch
 mediapipe
 numpy
 scipy
+torchvision
+python-multipart
