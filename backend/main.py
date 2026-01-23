@@ -4,7 +4,22 @@ import os
 import tempfile
 from services.analyzer import analyze_video
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+# Configure CORS
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Health check endpoints
 @app.get("/")
@@ -12,7 +27,7 @@ def read_root():
     return {"status": "ok", "message": "Voxear Backend is running"}
 
 # 
-@app.get("/health")
+@app.get("/health")agay talaga 
 def health_check():
     return {"status": "healthy"}
 
