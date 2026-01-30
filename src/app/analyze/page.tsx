@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { NavigationMenuHeader } from "@/components/header/header";
 import { NavigationCircle } from "@/components/ui/navigation-circle";
 import { Loader2, Check, XCircle } from "lucide-react";
-import { GridBackground } from "@/components/ui/grid-bg";
 import { useVideo } from "@/context/video-context";
 import { analyzeVideo } from "@/lib/api";
 
@@ -90,8 +89,7 @@ export default function AnalyzePage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
-      <GridBackground />
+    <div className="relative min-h-screen bg-white text-foreground">
       <NavigationMenuHeader />
 
       <div className="relative z-20 mt-6 md:mt-10">

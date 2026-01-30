@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { NavigationMenuHeader } from "@/components/header/header"
-import { GridBackground } from "@/components/ui/grid-bg"
 import { NavigationCircle } from "@/components/ui/navigation-circle"
 import { useRouter } from "next/navigation"
 
@@ -40,8 +39,6 @@ export default function ResultsPage() {
 		<div>
 			<NavigationMenuHeader />
 			<div className="relative flex min-h-screen flex-col bg-white text-foreground overflow-x-hidden">
-				<GridBackground />
-
 				<main className="relative z-10 flex flex-1 flex-col items-center pt-16 md:pt-24 text-center gap-6 px-4 w-full">
 					<div className="w-full max-w-6xl">
 						{/* Steps */}

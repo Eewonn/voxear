@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { NavigationMenuHeader } from "@/components/header/header"
-import { GridBackground } from "@/components/ui/grid-bg"
 import { Upload, BarChart3, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { VideoReady } from "./video-ready"
@@ -35,9 +34,6 @@ export default function UploadPage() {
         <div>
             <NavigationMenuHeader />
             <div className="relative flex min-h-screen flex-col bg-white text-foreground overflow-x-hidden">
-                {/* Perspective Grid Background */}
-                <GridBackground />
-
                 {/* Content */}
                 <main className="relative z-10 flex flex-1 flex-col items-center pt-16 md:pt-24 text-center gap-8 px-4 pb-20">
 
